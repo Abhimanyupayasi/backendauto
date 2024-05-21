@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Appointments</title>
+    <style>
+        ul{
+            list-style-type: none;
+        }
+        li{
+            border: 1px solid black;
+            margin: 10px;
+            padding: 10px;
+        }
+        table{
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td{
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+        th{
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <table style="border: 1px solid black;" id="table">
+        <tr>
+            <th>User</th>
+            <th>Date</th>
+            <th>Disease</th>
+            <th>Slot</th>
+        </tr>
+
+    </table>
+
+    <script>
+    //     const url = new URL(window.location.href);
+      
+    //   // Use URLSearchParams to get the token and name parameters
+    //     const user = url.searchParams.get('appoints');
+    //     console.log(user);
+    fetch('http://localhost:3000/api/v1/appoint/get').then(res => res.json()).then(data => {
+
+        const appoints = data.appoints;
+        localStorage.setItem('appoints', JSON.stringify(appoints));
+        //check the length of the array
+        const length = appoints.length;
+        //loop through the array
+        for(let i=0; i<length; i++){
+            
+           // find the values from the array of appoints
+            user    = appoints[i].user;
+            date1    = appoints[i].date;
+           // making the date easy way to understand
+            date    = new Date(date1).toDateString();
+            slot   = appoints[i].slot;
+
+
+            disease = appoints[i].disease;
+            // we can print in ul li format
+
+            // const li = document.createElement('li');
+            // li.textContent = user + ' ' + date + ' ' + disease + ' ' + slot;
+            // ul.appendChild(li);
+
+            // we can print in table format
+
+            const table = document.getElementById('table'); // Get the table by its ID
+            const row = table.insertRow(); // Create a new row
+
+// Create cells for each piece of data and append them to the row
+            const userCell = row.insertCell();
+            userCell.textContent = user;
+
+            const dateCell = row.insertCell();
+            dateCell.textContent = date;
+
+            const diseaseCell = row.insertCell();
+            diseaseCell.textContent = disease;
+
+            const slotCell = row.insertCell();
+            slotCell.textContent = slot;
+        }
+    });
+
+    
+
+    </script>
+</body>
+</html>
