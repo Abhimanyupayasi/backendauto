@@ -1,3 +1,2 @@
 .env
-.txt
-info.txt
+/node_modules
