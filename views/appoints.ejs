@@ -44,7 +44,7 @@
     //   // Use URLSearchParams to get the token and name parameters
     //     const user = url.searchParams.get('appoints');
     //     console.log(user);
-    fetch('http://localhost:3000/api/v1/appoint/get').then(res => res.json()).then(data => {
+    fetch('https://backendauto-zasj.onrender.com/api/v1/appoint/get').then(res => res.json()).then(data => {
 
         const appoints = data.appoints;
         localStorage.setItem('appoints', JSON.stringify(appoints));
